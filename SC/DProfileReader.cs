@@ -360,9 +360,11 @@ namespace SCJMapper_V2.SC
               } );
               if ( !String.IsNullOrEmpty( item ) ) {
                 // finally.... it is a valid actionmap
-                m_currentMap = new ActionMap( );
-                m_currentMap.name = mapName;
-                m_aMap.Add( mapName, m_currentMap ); // add to our inventory
+                if( !m_aMap.TryGetValue( mapName, out m_currentMap ) ) {
+                    m_currentMap = new ActionMap();
+                    m_currentMap.name = mapName;
+                    m_aMap.Add( mapName, m_currentMap ); // add to our inventory
+                }
                 m_state = EState.inActionMap; // now we are in and processing the map
               }
             }
